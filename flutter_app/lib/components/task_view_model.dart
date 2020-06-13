@@ -24,7 +24,7 @@ class TaskViewModel extends ChangeNotifier {
           'body': item.body,
         })
     );
-    if (res.statusCode == 200) {
+    if (res.statusCode == 201) {
       final task = Task.fromJson(json.decode(res.body));
       items.add(Task(
           id: task.id,
@@ -34,7 +34,6 @@ class TaskViewModel extends ChangeNotifier {
       ));
       notifyListeners();
     } else {
-
     }
   }
 
@@ -50,23 +49,31 @@ class TaskViewModel extends ChangeNotifier {
           'body': task.body,
         })
     );
-    final index = items.indexWhere((element) => element.id == task.id);
-    final item = items[index];
-    items[index] = Task(
-      id: item.id,
-      done: task.done,
-      title: item.title,
-      body: item.body
-    );
-    notifyListeners();
+    if (res.statusCode == 200) {
+      final index = items.indexWhere((element) => element.id == task.id);
+      final item = items[index];
+      items[index] = Task(
+          id: item.id,
+          done: task.done,
+          title: item.title,
+          body: item.body
+      );
+      notifyListeners();
+    } else {
+
+    }
   }
 
   Future<void> load() async {
     final res = await http.get(BASE_URL);
-    final List<dynamic> tasks = json.decode(res.body);
-    items = tasks.map((e) {
-      return Task.fromJson(e);
-    }).toList();
-    notifyListeners();
+    if (res.statusCode == 200) {
+      final List<dynamic> tasks = json.decode(res.body);
+      items = tasks.map((e) {
+        return Task.fromJson(e);
+      }).toList();
+      notifyListeners();
+    } else {
+
+    }
   }
 }

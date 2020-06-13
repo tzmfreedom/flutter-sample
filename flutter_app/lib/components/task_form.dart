@@ -42,25 +42,20 @@ class NewTaskFormState extends State<NewTaskForm> {
                 });
               }
           ),
-          Consumer<TaskViewModel>(
-              builder: (context, viewModel, child) {
-                return RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      viewModel.add(
-                          Task(
-                            id: 0,
-                            done: false,
-                            title: inputTitle,
-                            body: inputBody
-                          )
-                      );
-                      Navigator.pop(context, 'New Task Created');
-                    }
-                  },
-                  child: Text('Submit'),
-                );
+          RaisedButton(
+            onPressed: () {
+              final viewModel = Provider.of<TaskViewModel>(context, listen: false);
+              if (_formKey.currentState.validate()) {
+                viewModel.add(Task(
+                    id: 0,
+                    done: false,
+                    title: inputTitle,
+                    body: inputBody
+                ));
+                Navigator.pop(context, 'New Task Created');
               }
+            },
+            child: Text('Submit'),
           ),
         ],
       ),
