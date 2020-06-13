@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/components/task_row.dart';
 import 'package:flutterapp/components/task_view_model.dart';
@@ -26,7 +27,20 @@ class _TodoList extends State<TodoList> {
     Container(
       child: Consumer<TaskViewModel>(
         builder: (context, viewModel, child) {
-          return Text('search');
+          var images = List<Widget>();
+          for (var i = 0; i < 30; i++) {
+            images.add(
+                CachedNetworkImage(
+                  imageUrl: 'https://picsum.photos/id/${i}/100/100',
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                )
+            );
+          }
+          return GridView.count(
+            children: images,
+            crossAxisCount: 3,
+          );
         },
       ),
     ),
