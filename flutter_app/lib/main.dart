@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutterapp/components/task_view_model.dart';
 import 'package:flutterapp/models/task.dart';
 
+import 'components/app_main.dart';
 import 'components/new_task.dart';
 import 'components/todo_list.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/tasks',
         routes: {
-          '/tasks': (context) => TodoList(),
+          '/tasks': (context) => AppMain(),
           '/tasks/detail': (context) {
             final Task item = ModalRoute.of(context).settings.arguments;
             return TaskDetail(item: item);
