@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/components/task_view_model.dart';
 import 'package:flutterapp/models/task.dart';
+import 'package:provider/provider.dart';
 
 class TaskRow extends StatelessWidget {
   final Task item;
@@ -7,26 +9,44 @@ class TaskRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, "/tasks/detail", arguments: item);
-      },
-      child: Padding(
-          padding: EdgeInsets.all(5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:<Widget>[
-              Text(item.title, style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              )),
-              Text(item.body, style: TextStyle(
-                  fontSize: 15
-              )),
-            ],
-          )
-      ),
+    return Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children:<Widget>[
+            Checkbox(
+              value: item.done,
+              onChanged: (value) {
+                Provider.of<TaskViewModel>(context, listen: false).update(Task(
+                  id: item.id,
+                  done: value,
+                  title: item.title,
+                  body: item.body,
+                ));
+              },
+            ),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                Navigator.pushNamed(context, "/tasks/detail", arguments: item);
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(item.title, style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(item.body, style: TextStyle(
+                        fontSize: 15
+                    )),
+                  ),
+                ],
+              ),
+            )
+          ],
+        )
     );
   }
 }

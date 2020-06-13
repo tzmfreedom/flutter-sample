@@ -49,8 +49,10 @@ class NewTaskFormState extends State<NewTaskForm> {
                     if (_formKey.currentState.validate()) {
                       viewModel.add(
                           Task(
-                              title: inputTitle,
-                              body: inputBody
+                            id: 0,
+                            done: false,
+                            title: inputTitle,
+                            body: inputBody
                           )
                       );
                       Navigator.pop(context, 'New Task Created');

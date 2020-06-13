@@ -6,7 +6,6 @@ import 'package:flutterapp/components/task_view_model.dart';
 import 'package:flutterapp/models/task.dart';
 
 import 'components/new_task.dart';
-import 'components/task_row.dart';
 import 'components/todo_list.dart';
 
 void main() {
@@ -18,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => TaskViewModel(items: <Task>[
-        Task(title: "task1", body: "body1"),
-        Task(title: "task2", body: "body2"),
-        Task(title: "task3", body: "body3"),
-      ]),
+      create: (context) => TaskViewModel(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

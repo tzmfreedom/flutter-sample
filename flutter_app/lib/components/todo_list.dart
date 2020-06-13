@@ -4,12 +4,9 @@ import 'package:flutterapp/components/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TodoList extends StatelessWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Todo App'),
       ),
