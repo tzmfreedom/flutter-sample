@@ -13,8 +13,8 @@ class NewTaskForm extends StatefulWidget {
 class NewTaskFormState extends State<NewTaskForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String inputTitle = "";
-  String inputBody = "";
+  String inputTitle = '';
+  String inputBody = '';
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,8 @@ class NewTaskFormState extends State<NewTaskForm> {
           ),
           RaisedButton(
             onPressed: () {
-              final viewModel = Provider.of<TaskViewModel>(context, listen: false);
+              final viewModel = Provider
+                  .of<TaskViewModel>(context, listen: false);
               if (_formKey.currentState.validate()) {
                 viewModel.add(Task(
                     id: 0,
@@ -55,7 +56,7 @@ class NewTaskFormState extends State<NewTaskForm> {
                 Navigator.pop(context, 'New Task Created');
               }
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           ),
         ],
       ),

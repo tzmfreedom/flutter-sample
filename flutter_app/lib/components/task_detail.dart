@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/models/task.dart';
 
 class TaskDetail extends StatelessWidget {
+  const TaskDetail({Key key, this.item }) : super(key: key);
+
   final Task item;
-  TaskDetail({Key key, this.item }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,11 @@ class TaskDetail extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Text(item.title, style: TextStyle(
+          Text(item.title, style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           )),
-          Text(item.body, style: TextStyle(
+          Text(item.body, style: const TextStyle(
             fontSize: 15,
           )),
         ],

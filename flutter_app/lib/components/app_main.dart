@@ -16,28 +16,28 @@ class _AppMain extends State<AppMain> {
   List<BottomNavigationBarItem> navigationBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      title: Text("HOME"),
+      title: const Text('HOME'),
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.search),
-      title: Text("GRID VIEW"),
+      title: const Text('GRID VIEW'),
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.details),
-      title: Text("DETAIL"),
+      title: const Text('DETAIL'),
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final onTap = (index) {
+    void onTap(int index) {
       setState(() => _currentIndex = index);
-    };
+    }
     final navBar = BottomNavigationBar(
       items: navigationBarItems,
       currentIndex: _currentIndex,
       onTap: onTap,
-    );// This trailing comma makes auto-formatting nicer for build methods.
+    );
 
     switch (_currentIndex) {
       case 0:
@@ -47,5 +47,6 @@ class _AppMain extends State<AppMain> {
       case 2:
         return CustomTabbarView(onTap: onTap, navBar: navBar);
     }
+    throw Exception('currentIndex is over');
   }
 }

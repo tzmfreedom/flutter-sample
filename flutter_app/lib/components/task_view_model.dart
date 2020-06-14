@@ -1,20 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/models/task.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class TaskViewModel extends ChangeNotifier {
-  List<Task> items = List<Task>();
+  List<Task> items = <Task>[];
+  bool isLoaded = false;
+  Client client = Client();
 
-  static const BASE_URL = 'http://10.0.2.2:3000/Todos';
+  static const baseUrl = 'http://localhost:3000/Todos';
 
-  TaskViewModel() {
-    this.load();
-  }
-
-  void add(Task item) async {
-    final res = await http.post(
-        BASE_URL,
+  Future<void> add(Task item) async {
+    final res = await client.post(
+        baseUrl,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -25,7 +23,7 @@ class TaskViewModel extends ChangeNotifier {
         })
     );
     if (res.statusCode == 201) {
-      final task = Task.fromJson(json.decode(res.body));
+      final task = Task.fromJson(json.decode(res.body) as Map<String, dynamic>);
       items.add(Task(
           id: task.id,
           done: item.done,
@@ -37,9 +35,9 @@ class TaskViewModel extends ChangeNotifier {
     }
   }
 
-  void update(Task task) async {
-    final res = await http.put(
-        BASE_URL + '/' + task.id.toString(),
+  Future<void> update(Task task) async {
+    final res = await client.put(
+        '$baseUrl/${task.id}',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -65,12 +63,13 @@ class TaskViewModel extends ChangeNotifier {
   }
 
   Future<void> load() async {
-    final res = await http.get(BASE_URL);
+    final res = await client.get(baseUrl);
     if (res.statusCode == 200) {
-      final List<dynamic> tasks = json.decode(res.body);
-      items = tasks.map((e) {
-        return Task.fromJson(e);
+      final tasks = json.decode(res.body) as List<dynamic>;
+      items = tasks.map((dynamic e) {
+        return Task.fromJson(e as Map<String, dynamic>);
       }).toList();
+      isLoaded = true;
       notifyListeners();
     } else {
 

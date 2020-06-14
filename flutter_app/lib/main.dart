@@ -7,7 +7,6 @@ import 'package:flutterapp/models/task.dart';
 
 import 'components/app_main.dart';
 import 'components/new_task.dart';
-import 'components/todo_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => TaskViewModel(),
+      create: (context) {
+        return TaskViewModel()
+          ..load();
+      },
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/tasks': (context) => AppMain(),
           '/tasks/detail': (context) {
-            final Task item = ModalRoute.of(context).settings.arguments;
+            final item = ModalRoute.of(context).settings.arguments as Task;
             return TaskDetail(item: item);
           },
           '/tasks/new': (context) => NewTask(),

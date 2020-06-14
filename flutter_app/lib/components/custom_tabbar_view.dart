@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/components/task_row.dart';
 import 'package:flutterapp/components/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CustomTabbarView extends StatelessWidget {
-  final Function onTap;
-  final BottomNavigationBar navBar;
+  const CustomTabbarView({ this.onTap, this.navBar });
 
-  CustomTabbarView({ this.onTap, this.navBar });
+  final Function(int) onTap;
+  final BottomNavigationBar navBar;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class CustomTabbarView extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Todo App'),
+            title: const Text('Todo App'),
             bottom: TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.directions_car)),
@@ -26,7 +25,7 @@ class CustomTabbarView extends StatelessWidget {
           body: Container(
             child: Consumer<TaskViewModel>(
               builder: (context, viewModel, child) {
-                return TabBarView(
+                return const TabBarView(
                   children: <Widget>[
                     Text('Hello'),
                     Text('World'),
@@ -35,7 +34,7 @@ class CustomTabbarView extends StatelessWidget {
               },
             ),
           ),
-          bottomNavigationBar: navBar,// This trailing comma makes auto-formatting nicer for build methods.
+          bottomNavigationBar: navBar,
         )
     );
   }

@@ -6,16 +6,9 @@ class NewTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Task'),
+        title: const Text('New Task'),
       ),
       body: NewTaskForm(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        tooltip: 'Back',
-        child: Icon(Icons.arrow_back),
-      ),
     );
   }
 }

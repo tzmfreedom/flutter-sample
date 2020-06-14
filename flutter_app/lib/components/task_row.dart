@@ -4,13 +4,14 @@ import 'package:flutterapp/models/task.dart';
 import 'package:provider/provider.dart';
 
 class TaskRow extends StatelessWidget {
+  const TaskRow({Key key, this.item}) : super(key: key);
+
   final Task item;
-  TaskRow({Key key, this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Row(
           children:<Widget>[
             Checkbox(
@@ -27,7 +28,7 @@ class TaskRow extends StatelessWidget {
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                Navigator.pushNamed(context, "/tasks/detail", arguments: item);
+                Navigator.pushNamed(context, '/tasks/detail', arguments: item);
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,8 +38,8 @@ class TaskRow extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )),
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(item.body, style: TextStyle(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(item.body, style: const TextStyle(
                         fontSize: 15
                     )),
                   ),

@@ -4,34 +4,55 @@ import 'package:flutterapp/components/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TodoList extends StatelessWidget {
-  final Function onTap;
-  final BottomNavigationBar navBar;
+  const TodoList({ this.onTap, this.navBar });
 
-  TodoList({ this.onTap, this.navBar });
+  final Function(int) onTap;
+  final BottomNavigationBar navBar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo App'),
+        title: const Text('Todo App'),
       ),
       body: Container(
         child: Consumer<TaskViewModel>(
           builder: (context, viewModel, child) {
-            return ListView(
-              children: viewModel.items.map((item) => TaskRow(item: item))
-                  .toList(),
+            if (viewModel.isLoaded) {
+              return RefreshIndicator(
+                  child: ListView(
+                    children: viewModel.items.map((item) => TaskRow(item: item))
+                        .toList(),
+                  ),
+                  onRefresh: () async {
+                    await viewModel.load();
+                  }
+              );
+            }
+            return Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(0, 0, 0, 0.6),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                ],
+              ),
             );
           },
         ),
       ),
       floatingActionButton: Builder(
-          builder: (BuildContext context) {
+          builder: (context) {
             return FloatingActionButton(
               onPressed: () async {
                 final result = await Navigator.pushNamed(context, '/tasks/new');
                 if (result != null) {
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('$result')));
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('$result')));
                 }
               },
               tooltip: 'Add',
