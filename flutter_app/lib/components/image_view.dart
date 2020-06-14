@@ -3,9 +3,8 @@ import 'package:flutterapp/components/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ImageView extends StatelessWidget {
-  const ImageView({ this.onTap, this.navBar });
+  const ImageView({ this.navBar });
 
-  final Function(int) onTap;
   final BottomNavigationBar navBar;
 
   @override

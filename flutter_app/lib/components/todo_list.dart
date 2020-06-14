@@ -4,9 +4,8 @@ import 'package:flutterapp/components/task_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TodoList extends StatelessWidget {
-  const TodoList({ this.onTap, this.navBar });
+  const TodoList({ this.navBar });
 
-  final Function(int) onTap;
   final BottomNavigationBar navBar;
 
   @override
