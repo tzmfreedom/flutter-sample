@@ -14,17 +14,17 @@ class _AppMain extends State<AppMain> {
   int _currentIndex = 0;
 
   List<BottomNavigationBarItem> navigationBarItems = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      title: const Text('HOME'),
+      title: Text('HOME'),
     ),
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(Icons.search),
-      title: const Text('GRID VIEW'),
+      title: Text('GRID VIEW'),
     ),
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(Icons.details),
-      title: const Text('DETAIL'),
+      title: Text('DETAIL'),
     ),
   ];
 

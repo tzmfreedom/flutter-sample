@@ -15,7 +15,7 @@ class CustomTabbarView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Todo App'),
-            bottom: TabBar(
+            bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.directions_car)),
                 Tab(icon: Icon(Icons.directions_transit)),

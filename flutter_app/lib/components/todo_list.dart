@@ -14,6 +14,46 @@ class TodoList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo App'),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            );
+          },
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: const <Widget>[
+            DrawerHeader(
+              child: Text(
+                'MyApp',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('hoge'),
+            ),
+            ListTile(
+              title: Text('fuga'),
+            ),
+            ListTile(
+              title: Text('foo'),
+            ),
+            ListTile(
+              title: Text('bar'),
+            ),
+          ],
+        )
       ),
       body: Container(
         child: Consumer<TaskViewModel>(
@@ -36,7 +76,7 @@ class TodoList extends StatelessWidget {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: const <Widget>[
                   CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
                 ],
@@ -56,7 +96,7 @@ class TodoList extends StatelessWidget {
                 }
               },
               tooltip: 'Add',
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             );
           }
       ),

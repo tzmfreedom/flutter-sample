@@ -28,7 +28,7 @@ class TaskDetail extends StatelessWidget {
           Navigator.pop(context);
         },
         tooltip: 'Back',
-        child: Icon(Icons.arrow_back),
+        child: const Icon(Icons.arrow_back),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

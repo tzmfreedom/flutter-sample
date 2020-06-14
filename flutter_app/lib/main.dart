@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/components/map_widget.dart';
 import 'package:flutterapp/components/task_detail.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,10 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/tasks',
         routes: {
-          '/tasks': (context) => AppMain(),
+          '/tasks': (context) {
+            // return AppMain()
+            return MainMap();
+          },
           '/tasks/detail': (context) {
             final item = ModalRoute.of(context).settings.arguments as Task;
             return TaskDetail(item: item);
